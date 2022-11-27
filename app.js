@@ -7,13 +7,20 @@ const ejs = require('ejs');
 const Photo = require('./models/Photo');
 const PhotoControllers = require('./controllers/photoControllers');
 const PageControllers = require('./controllers/pageControllers');
-const port = 8888;
+const port = process.env.PORT || 8888;
+require("dotenv").config();
+
+
 
 const app = express();
-mongoose.connect('mongodb://127.0.0.1:27017/pcat-test2-db', {
+mongoose.connect(`mongodb+srv://${process.env.USERNAME_ID}:${process.env.PAROLA}@pcatapp.h8qnibt.mongodb.net/?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+}).then(()=>{
+  console.log("db connected");
+}).catch((err)=>{
+  console.log(err);
+})
 
 /**const logger= (req,res,next)=>{
     console.log("log 1");
